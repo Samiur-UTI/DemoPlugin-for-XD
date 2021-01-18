@@ -1,0 +1,22 @@
+{
+    "id": "07b20507",
+    "name": "NameAppend",
+    "version": "0.0.1",
+    "description": "Add text tag to components",
+    "summary": "Summary of your plugin",
+    "languages": ["en"],
+    "author": "Samiur",
+    "helpUrl": "https://mywebsite.com/help",
+    "host": {
+      "app": "XD",
+      "minVersion": "13.0"
+    },
+    "uiEntryPoints": [
+      {
+        "type": "panel",
+        "label": "Font shift",
+        "panelId":"appendName",
+        "shortcut" : {"mac" : "Cmd+Alt+N", "win" : "Ctrl+Alt+q"}
+      }
+    ]
+  }
