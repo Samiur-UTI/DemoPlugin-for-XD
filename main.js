@@ -25,7 +25,11 @@ function create() {
         <div class="row break">
             <label class="row">
                 <span>↕︎</span>
-                <input type="text" uxp-quiet="true" id="append" value="[Style]" placeholder="Insert Value" />
+                <input type="text" uxp-quiet="true" id="append1" placeholder="Insert Value" />
+            </label>
+            <label class="row">
+                <span>↕︎</span>
+                <input type="text" uxp-quiet="true" id="append2" placeholder="Insert Value" />
             </label>
         </div>
         <footer><button id="ok" type="submit" uxp-variant="cta">Submit</button></footer>
@@ -33,13 +37,19 @@ function create() {
     `
     function appendName() {
         const { editDocument } = require("application");
-        const textToAppend = String(document.querySelector("#append").value);
-        editDocument({ editLabel: "Append Name for Item" },  function workerFunction(selection, searchResult){
+        const textToAppend1 = String(document.querySelector("#append1").value);
+        const textToAppend2 = String(document.querySelector("#append2").value);
+        editDocument({ editLabel: "Append Name for Item1" },  function workerFunction1(selection){
             if(selection.items.length !== 0 && selection.items.length === 1){
                 selection.itemsIncludingLocked.forEach( node => {
                     let previousName = node.name;
-                    node.name = textToAppend + " " + previousName;
+                    node.name = textToAppend1 + " " + previousName;
                 })
+            } else if (selection.items.length > 1){
+                let node1 = selection.itemsIncludingLocked[0].name;
+                let node2 = selection.itemsIncludingLocked[1].name;
+                selection.itemsIncludingLocked[0].name = textToAppend1 + " " + node1;
+                selection.itemsIncludingLocked[1].name = textToAppend2 + " " + node2;
             }
         } )
     }
