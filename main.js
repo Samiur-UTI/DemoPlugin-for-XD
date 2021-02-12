@@ -61,9 +61,24 @@ function create() {
             }
         })
     }
+    function appendSavedTag(){
+        const { editDocument } = require("application");
+        const textToAppend1 = String(document.querySelector("#append1").value);
+        savedTag1 = textToAppend1;
+        editDocument({ editLabel: "Saved Append Name for Item1" }, 
+            function workerFunction(selection){
+                if(selection.items.length !== 0 && selection.items.length === 1){
+                    selection.itemsIncludingLocked.forEach( node => {
+                        let previousName = node.name;
+                        node.name = textToAppend1 + " " + previousName;
+                    })
+                }
+            })
+    }
     panel = document.createElement("div");
     panel.innerHTML = HTML;
     panel.querySelector("form").addEventListener("submit", appendName);
+    panel.querySelector("#chonu").addEventListener("click", appendSavedTag);
 
     return panel;
 }
