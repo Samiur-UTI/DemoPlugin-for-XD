@@ -61,7 +61,7 @@ function create() {
             }
         })
     }
-    function appendSavedTag(){
+    function appendSavedTag1(){
         const { editDocument } = require("application");
         const textToAppend1 = String(document.querySelector("#append1").value);
         savedTag1 = textToAppend1;
@@ -75,10 +75,25 @@ function create() {
                 }
             })
     }
+    function appendSavedTag2(){
+        const { editDocument } = require("application");
+        const textToAppend2 = String(document.querySelector("#append2").value);
+        savedTag2 = textToAppend2;
+        editDocument({ editLabel: "Saved Append Name for Item2" }, 
+            function workerFunction(selection){
+                if(selection.items.length !== 0 && selection.items.length === 1){
+                    selection.itemsIncludingLocked.forEach( node => {
+                        let previousName = node.name;
+                        node.name = textToAppend2 + " " + previousName;
+                    })
+                }
+            })
+    }
     panel = document.createElement("div");
     panel.innerHTML = HTML;
     panel.querySelector("form").addEventListener("submit", appendName);
-    panel.querySelector("#chonu").addEventListener("click", appendSavedTag);
+    panel.querySelector("#chonu").addEventListener("click", appendSavedTag1);
+    panel.querySelector("#monu").addEventListener("click", appendSavedTag2);
 
     return panel;
 }
