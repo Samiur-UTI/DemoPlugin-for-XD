@@ -1,4 +1,6 @@
 let panel;
+let savedTag1 = " ";
+let savedTag2 = " ";
 function create() {
     const HTML =
     `<style>
@@ -26,10 +28,16 @@ function create() {
             <label class="row">
                 <span>↕︎</span>
                 <input type="text" uxp-quiet="true" id="append1" placeholder="Insert Value" />
+                <button id="chonu" type="submit" uxp-variant="cta">${savedTag1}</button>
             </label>
             <label class="row">
                 <span>↕︎</span>
                 <input type="text" uxp-quiet="true" id="append2" placeholder="Insert Value" />
+                <button id="monu" type="submit" uxp-variant="cta">${savedTag2}</button>
+            </label>
+            <label class="row">
+                <span>↕︎</span>
+                <input type="text" uxp-quiet="true" id="search" placeholder="Search for tags" />
             </label>
         </div>
         <footer><button id="ok" type="submit" uxp-variant="cta">Submit</button></footer>
@@ -39,7 +47,7 @@ function create() {
         const { editDocument } = require("application");
         const textToAppend1 = String(document.querySelector("#append1").value);
         const textToAppend2 = String(document.querySelector("#append2").value);
-        editDocument({ editLabel: "Append Name for Item1" },  function workerFunction1(selection){
+        editDocument({ editLabel: "Append Name for Item1" },  function workerFunction(selection){
             if(selection.items.length !== 0 && selection.items.length === 1){
                 selection.itemsIncludingLocked.forEach( node => {
                     let previousName = node.name;
@@ -51,7 +59,7 @@ function create() {
                 selection.itemsIncludingLocked[0].name = textToAppend1 + " " + node1;
                 selection.itemsIncludingLocked[1].name = textToAppend2 + " " + node2;
             }
-        } )
+        })
     }
     panel = document.createElement("div");
     panel.innerHTML = HTML;
@@ -62,7 +70,6 @@ function create() {
 function show(event) {
     if (!panel) event.node.appendChild(create());
 }
-
 
 module.exports = {
     panels: {
